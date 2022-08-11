@@ -1,0 +1,46 @@
+#ingreso para articulos y venta de los mismos
+
+#declaramos el ingreso de los articulos y el precio en las variables nombre y precio
+
+nombre = input("Nombre del producto: ")
+precio = float(input("Precio del producto: "))
+marca_producto = input("marca del producto: ")
+
+#iniciamos la cantidad de ventas en 0
+cantidad_vendida = 0.0
+
+#lista para precios, para nombres y para cantidades vendidas
+
+nombres = [nombre]
+precios = [precio]
+cantidades_vendidas = [cantidad_vendida]
+
+#agregamos los nombres, precios y cantidad vendidas a su lista
+
+nombres.append(nombre)
+precios.append(precio)
+cantidades_vendidas.append(cantidad_vendida)
+
+#le pedimos que nos digan que articulo se va a vender
+
+nombre_articulo = input("Nombre del artículo que se vende: ")
+
+
+
+if nombre_articulo in nombres: #si el articulo ingresado esta en la lista de nombres
+    cantidad = float(input("Cantidad vendida: ")) 
+    indice = nombres.index(nombre_articulo) #con index buscamos el articulo en la lista
+    precio = precios[indice]
+    cantidades_vendidas[indice] += cantidad #sumamos la de articulos a la variable cantidad para mostrar cuantos vendemos
+    print(
+        f"Se vende(n) {cantidad} {nombre_articulo}. Total: {cantidad * precio}") #concatenamos para mostrar pòr pantalla lo vendido
+else: 
+    print("El artículo no existe") #si no existe el articulo que se ingresa se muestra este mensaje
+
+registro = { #creamos un diccionario donde asigamos los valores ingresados para devolverlo despues por pantalla
+    "producto": nombre,
+    "precioproducto": precio,
+    "clavedelproducto": marca_producto
+}
+
+print(registro)
