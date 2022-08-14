@@ -1,12 +1,13 @@
+
 nombres = []
 precios = []
 cantidades_vendidas = []
 cantidad_vendida = 0.0
 cantidad_de_producto = 0.0
-lista = []
+listaProd = []
+finalizar = False #agregue la variable para modificarla con la opcion 4 y poder salir del programa
 
-finalizar = False
-
+#agregamos un menu con 4 opciones
 while not finalizar:
     eleccion = input("""
 1 - Introducir un artículo nuevo
@@ -14,49 +15,52 @@ while not finalizar:
 3 - saber cuantos produtos distintos hay disponibles
 4 - finalizar
 
-Seleccione: """)
+Seleccione: """) #opcion 1 
     if eleccion == "1":
-        nombre = input("Nombre del producto : ")
-        precio = float(input("Precio del producto: "))
-        cantidadaagregar = float(input("cantidad que desea agregar: "))
+        nombre = input("Nombre del producto : ") #debe ingresar el nombre del producto
+        precio = float(input("Precio del producto: "))#debe ingresar un precio para el producto
+        cantidadaagregar = float(input("cantidad que desea agregar: ")) #un valor para agregar cantidad de productos 
         
-        cantidad_de_producto += cantidadaagregar
+        cantidad_de_producto += cantidadaagregar #variable para acumular la cantidad de productos 
         
+        #agregar los valores ingresados a las listas para luego usarlas en la opcion 2
         nombres.append(nombre)
         precios.append(precio)
         cantidades_vendidas.append(cantidad_vendida)
         
+        #diccionario para almacenar valores ingresados
+        
         infoproducto = {"nombre": nombre,"precio": precio }
         
-        infoproducto["nombre"] = nombre
-        infoproducto["precio"] = precio
-        infoproducto["cantidadaagregar"] = cantidadaagregar
+        infoproducto["nombre"] = nombre #le asigna el valor que se ingresa a la clave del diccionario que corresponde
+        infoproducto["precio"] = precio #agrega el precio a la clave precio
+        infoproducto["cantidadaagregar"] = cantidadaagregar #lo mismo con la cantidad de productos que se desea agregar 
         
-        lista.append(infoproducto)
+        listaProd.append(infoproducto) #se agrega a la lista el diccionario
         
-        print(lista)
-            
+
+        print(listaProd) #se imprime la lista de diccionarios
         
-    elif eleccion == "2":
-        nombre_articulo = input("Nombre del artículo que se vende: ")
-        if nombre_articulo in nombres:
-            cantidad = float(input("Cantidad vendida: "))
-            indice = nombres.index(nombre_articulo)
+    elif eleccion == "2": # opcion 2
+        
+        nombre_articulo = input("Nombre del artículo que se vende: ") #almacena el nombre del articulo
+        if nombre_articulo in nombres: #si ese nombre esta registrado entonces sigue
+            cantidad = float(input("Cantidad vendida: ")) #solicita cantidad vendida
+            indice = nombres.index(nombre_articulo) #busca el producto en la lista de nombres
             precio = precios[indice]
             cantidades_vendidas[indice] += cantidad
             print(
-                f"Se vende(n) {cantidad} {nombre_articulo}. Total: {cantidad * precio}")
+                f"Se vende(n) {cantidad} {nombre_articulo}. Total: {cantidad * precio}") #si el nombre exisita devuelve lo vendido
         else:
-            print("El artículo no existe")
+            print("El artículo no existe") #si no existe retorna este mensaje
             
     elif eleccion == "3":
-        if len(nombres) <= 0:
+        if len(nombres) <= 0: #corroboramos que si hay 0 o menos productos se avise que no hay disponibles
             print("No hay artículos")
         else:
-            numero_de_productos = len(nombres)
-            print("hay disponibles", numero_de_productos, "en este momento")
-            continue
+            numero_de_productos = len(nombres) #contamos los nombres de productos con len sobre la lista
+            print("hay disponibles", numero_de_productos, " articulos en este momento") #le decimos cuantos productos hay
         
-    elif eleccion == "4":
+    elif eleccion == "4": #si la eleccion es salir modificamos la variable finalizar
         finalizar = True
         print("programa finalizado")
